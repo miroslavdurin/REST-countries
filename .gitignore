@@ -10,6 +10,8 @@
 
 # production
 /build
+/design
+/starter_files
 
 # misc
 .DS_Store
