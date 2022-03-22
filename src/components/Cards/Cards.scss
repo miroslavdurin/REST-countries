@@ -1,0 +1,56 @@
+@import url('../../index.scss');
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 26.4rem);    
+    justify-items: center;
+    justify-content: center;
+    gap: 7.4rem;
+
+    &__inputs {
+        display: flex;
+        justify-content: space-between;
+        margin: 4.8rem 0;
+    }
+
+    &__input {
+        width: 48rem;
+        height: 5.6rem;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.4rem;
+        line-height: 2.0rem;
+        padding-left: 7.4rem;    
+        padding-right: 1rem;
+        border: none;
+        
+        &:focus {
+            outline: 1px solid lightgray;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        left: 3.2rem;
+        top: 1.9rem;
+        cursor: text;
+    }
+
+    &__select {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        option:focus {
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+    }    
+}
+
+.main-cards {
+    position: relative;
+}

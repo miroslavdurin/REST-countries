@@ -1,0 +1,19 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    &__btn-toggle-theme {
+        width: 10.8rem;
+        height: 2.2rem;
+        background-color: #fff;
+        border: none;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        cursor: pointer;
+    }
+}
