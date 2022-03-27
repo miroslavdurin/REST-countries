@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap');
 
-$font-main: 'Nunito Sans', sans-serif;
-$color-black: #111517;
-$color-grey: #848484;
+
+:root {
+  --font-main: 'Nunito Sans', sans-serif;
+  --color-black: #111517;
+  --color-grey: #848484;
+  --color-background-light-grey: #2B3844;
+  --color-background-dark-grey: #202C36;
+  --color-white: #fff;
+  --theme-transition:  all .4s ease;
+}
 
 *,
 *::after,
@@ -21,8 +28,8 @@ body {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: $font-main;
-    color: $color-black;
+    font-family: var(--font-main);
+    color: var(--color-black);
 }
 
 code {

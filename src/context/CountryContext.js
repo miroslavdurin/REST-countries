@@ -4,6 +4,7 @@ import { CountryReducer } from './CountryReducer';
 
 const INITIAL_STATE = {
     allCountries: [],
+    region:{},
     country: {},
     isLoaded: false,
     isError: false
@@ -26,6 +27,7 @@ export function CountryProvider({children}) {
             country: state.country, 
             isLoaded: state.isLoaded,
             isError: state.isError,
+            region: state.region,
             dispatch
         }}>
             {children}

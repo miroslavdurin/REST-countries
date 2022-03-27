@@ -1,8 +1,20 @@
+.App {
+    padding-bottom: 10rem;
+    min-height: 100vh;
+}
+
+.App.dark-theme {
+    background-color: var(--color-background-dark-grey);
+    transition: var(--theme-transition);
+
+}
 
 .container {
     max-width: 128rem;
     margin: 0 auto;
 }
+
+
 
 .mb {
     &-80 {

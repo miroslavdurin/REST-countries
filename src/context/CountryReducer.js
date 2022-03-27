@@ -5,19 +5,25 @@ export const ACTIONS = {
 }
 
 export function CountryReducer(state, action) { 
+    function createRegions(allCountries) {
+        const region = {}
     
-    
-    /* console.log(state.allCountries.map(country=>{
-        return state.country.borders.find(neighbour=>neighbour === country.cca3) 
-    }));  */
-    
+        allCountries.forEach(country=>{
+            if(!region[country.region.toLowerCase()]) region[country.region.toLowerCase()] = [country]
+            else region[country.region.toLowerCase()].push(country);
+        })
+
+        return region;
+    }
+          
     switch(action.type) {
         case ACTIONS.SET_ALL_COUNTRIES:
             return {
                 ...state,
                 isLoaded: true,
                 country: {},
-                allCountries: action.payload
+                allCountries: action.payload,
+                region: createRegions(action.payload)
             }
         case ACTIONS.SET_COUNTRY:
             return {
@@ -35,7 +41,8 @@ export function CountryReducer(state, action) {
                 ...state,
                 isLoaded: true,
                 country: {...action.payload.country},
-                allCountries: [...action.payload.allCountries]
+                allCountries: [...action.payload.allCountries],
+                region: createRegions(action.payload.allCountries)
             }
         default:
             return state

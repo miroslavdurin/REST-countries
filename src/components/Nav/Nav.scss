@@ -1,19 +1,35 @@
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 8rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--theme-transition);    
 
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 8rem;
+        width: 100%;
+    }
     &__btn-toggle-theme {
         width: 10.8rem;
         height: 2.2rem;
-        background-color: #fff;
+        background-color: transparent;
         border: none;
         font-style: normal;
         font-weight: 600;
         font-size: 1.6rem;
         line-height: 2.2rem;
         cursor: pointer;
+    }
+}
+
+.nav.dark-theme {
+    background-color: var(--color-background-light-grey);
+
+    .heading--h2 {
+        color: var(--color-white);
+    }
+
+    .nav__btn-toggle-theme {
+        color: var(--color-white);
     }
 }
