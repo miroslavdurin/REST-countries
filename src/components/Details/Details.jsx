@@ -1,20 +1,33 @@
 import React, { useReducer, useContext } from 'react';
 import { useState, useEffect } from 'react';
 import './Details.scss';
+import { ReactComponent as Arrow } from '../../assets/arrow-left.svg';
 
 import { fetchData } from '../../model/helpers';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import Loader from '../Loader/Loader';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
+
+import { AnimatePresence, motion, LayoutGroup } from 'framer-motion';
 
 function Details() {
     const location = useLocation();
     const path = location.pathname.replaceAll('%20', ' ').slice(1)
 
-    const {allCountries, country, isLoaded, isError, dispatch} = useContext(CountryContext);  
+    const {allCountries, country, isLoaded, dispatch, isDetails} = useContext(CountryContext);  
     const {dark} = useContext(ThemeContext);
-        
+
+
+    const [isExiting, setIsExiting] = useState(false);
+    const [load, setLoad] = useState(false)
+
+    
+    let navigate = useNavigate()
+
+    useEffect(()=>{setLoad(true)},[])
+    console.log(country.neighbours)
     useEffect(()=>{
         window.scrollTo({top: 0})
 
@@ -44,30 +57,53 @@ function Details() {
         if (allCountries.length === 0 ){     
             getCountry() 
         }
-
-        if (allCountries.length > 0 && country.cca3.toLowerCase() !== path) {            
+ 
+        if (allCountries.length > 0 && country.cca3.toLowerCase() !== path) {
+            if(!path) return;
             const findCountry = allCountries.find(c=>c.cca3.toLowerCase() === path);             
             dispatch({payload: {...findCountry}, type: 'setCountry'})
-        } 
+        }  
+
     }, [location.pathname])
 
-
+/* FIXME South africa bug */
     return (            
-        <main className='container'>
-            <Link className={`details__btn-back mb-80 ${dark && 'dark-theme'}`} to='/'>&#8592; Back</Link>
+
+        
+            <motion.main  transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
+            <button onClick={()=>{
+                dispatch({payload: false, type: 'setIsDetails'});
+                setIsExiting(true);           
+                navigate('/');                   
+               
+                }} className={`details__btn-back mb-80 ${dark && 'dark-theme'}`} ><Arrow/> Back</button>
             {
                 isLoaded ? 
                 <>
                         <div className={`details__container ${dark && 'dark-theme'}`}>
-                        <div className="details__flag-container">
-                            <img className="details__img" src={country.flags?.svg} alt="" />
-                        </div>
-                        <div className="details__info-container">
+                        
+                        <motion.div   
+                              transition={{layout: 
+                                {duration:  isDetails ? 0.4 : 1,
+                                ease: isDetails ? "easeOut" : "backInOut" }}}                              
+                                layoutId={ country.cca3.toLowerCase() }
+                                className="details__flag-container">                            
+                                <motion.img 
+                                    onLoad={()=>setLoad(true)}
+                                    layoutId= 'flag'
+                                    className="details__img" src={country.flags.svg} alt={country.name} />                          
+                        </motion.div>
+                        <motion.div key={country.capital} 
+                            initial={{opacity:0}}  
+                            animate={{opacity:1}} 
+                            exit={{ opacity:0, }}  
+                            transition={{duration: 0.2 }} 
+                            className="details__info-container">
                             <h1 className="heading--h1 mb-24">{country.name?.common}</h1>
                             <div className="details__details">
                                 <p className="details__paragraph">
                                     <span>Native Name: </span>
-                                    {country.name?.nativeName  ? Object.values(country.name?.nativeName)[0].common : country.name?.common} 
+                                    {country.name?.nativeName  ? Object.values(country.name?.nativeName)[0].common : country.name?.common}
                                 </p>
                                 <p className="details__paragraph">
                                     <span>Population: </span>
@@ -106,20 +142,22 @@ function Details() {
                                         <span>Border countries: </span>
                                         
                                     {isLoaded && country.neighbours.map(neighbour=> 
-                                        <Link key={neighbour.name.common} className="details__link" to={`/${neighbour.cca3.toLowerCase()}`}>{neighbour.name.common}</Link> )}                                  
+                                        <Link onClick={()=>!isDetails && dispatch({payload: true, type: 'setIsDetails'})} key={neighbour.name.common} className="details__link" to={`/${neighbour.cca3.toLowerCase()}`}>{neighbour.name.common}</Link> )}                                  
                                     </p>
                                 </div>
                             }
                             
-                        </div>
+                        </motion.div>  
+                        
+                        
                     </div>
                 </>
                 :
-                <h1>Loading</h1>
+                <Loader />
             }
             
-        </main>                 
-    
+        </motion.main>     
+                      
     )
 }
 

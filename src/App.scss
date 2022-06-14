@@ -1,58 +1,27 @@
 .App {
     padding-bottom: 10rem;
     min-height: 100vh;
+    transition: var(--theme-transition);
 }
 
 .App.dark-theme {
     background-color: var(--color-background-dark-grey);
-    transition: var(--theme-transition);
-
-}
-
-.container {
-    max-width: 128rem;
-    margin: 0 auto;
 }
 
 
 
-.mb {
-    &-80 {
-        margin-bottom: 8rem;
-    }
-
-    &-24 {
-        margin-bottom: 2.4rem;
-    }
-
-    &-16 {
-        margin-bottom: 1.6rem;
-    }
-
-    &-8 {
-        margin-bottom: 0.8rem;
-    }
+.arrow-up {
+    position: fixed;
+    width: 7rem;
+    height: 7rem;
+    bottom: 3vh;
+    right: 7vw;
+    border: var(--border);
+    border-radius: 100px;
+    padding: 1.6rem;
+    background-color: var(--color-white);
+    cursor: pointer;
 }
 
-.heading {
-    &--h1 {
-        font-style: normal;
-        font-weight: 800;
-        font-size: 3.2rem;
-        line-height: 4.4rem;
-    }
 
-    &--h2 {
-        font-size: 2.4rem;
-        font-weight: 800;
-        font-style: normal;
-        line-height: 3.3rem;
-    }
 
-    &--h3 {
-        font-size: 1.8rem;
-        font-weight: 800;
-        font-style: normal;
-        line-height: 2.6rem;
-    }
-}

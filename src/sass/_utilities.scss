@@ -1,0 +1,32 @@
+@use './mixins' as *;
+
+.mb {
+    &-80 {
+        margin-bottom: 8rem;
+    }
+
+    &-24 {
+        margin-bottom: 2.4rem;
+    }
+
+    &-16 {
+        margin-bottom: 1.6rem;
+    }
+
+    &-8 {
+        margin-bottom: 0.8rem;
+    }
+}
+
+.container {
+    max-width: 128rem;
+    margin: 0 auto;
+
+    @include respond(desktop) {
+        margin: 0 4rem;
+    }
+
+    @include respond(big-screen) {
+        max-width: 162rem;
+    }
+}

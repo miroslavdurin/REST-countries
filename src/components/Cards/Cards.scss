@@ -1,4 +1,4 @@
-@import url('../../index.scss');
+@use '../../sass/mixins' as *;
 
 .cards {
     display: grid;
@@ -11,6 +11,32 @@
         display: flex;
         justify-content: space-between;
         margin: 4.8rem 0;
+
+        @include respond(phone-lg) {
+            flex-direction: column;
+            gap: 4rem;
+        }
+    }
+
+    &__form {
+        position: relative;
+    }
+
+    &__input-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        width: 7rem;
+        height: 100%;
+        display: block;
+        display: flex;
+        align-items: center;
+        
+        svg {
+            margin-left: 3.2rem;
+            fill: var(--color-grey);
+        }
     }
 
     &__input {
@@ -23,23 +49,48 @@
         padding-left: 7.4rem;    
         padding-right: 1rem;
         border: none;
+        transition: var(--theme-transition);
+        
+
+        @include respond(phone-lg) {
+            width: 100%;
+        }
+        
         
         &:focus {
             outline: 1px solid lightgray;
         }
 
         &::placeholder {
-            color: #848484;
-        }
+            color: var(--color-grey)
+        }             
     }
 
     &__input.dark-theme {
         background-color: var(--color-background-light-grey);
-        color: var(--color-white);        
+        color: var(--color-white);   
+        
+        & + .cards__input-label {
+            svg {
+               fill: var(--color-white); 
+            }
+            
+        }
     }
 
     &__input.dark-theme::placeholder {
         color: var(--color-white);
+    }
+
+    &__input.error {
+        outline: 2px solid var(--color-danger);
+        color: var(--color-danger);
+
+        & + .cards__input-label {
+            svg {
+               fill: var(--color-danger); 
+            }            
+        }
     }
 
     &__region-select {
@@ -47,6 +98,7 @@
         font-size: 1.4rem;
         line-height: 2rem;
         background-color: var(--color-white);
+        transition: var(--theme-transition);
         &.dark-theme {
             background-color: var(--color-background-light-grey);
             color: var(--color-white);
@@ -56,20 +108,29 @@
                     background-color: var(--color-background-dark-grey);
                 }
             }
+
+            .cards__region-btn {
+                color: var(--color-white);
+                background-color: var(--color-background-light-grey);
+            }
         }
+
+        @include respond(phone-lg) {
+            width: fit-content;
+        }        
     }  
 
     &__region-btn {
-        font-family: inherit;
-        font-size: inherit;
-        color: inherit;
+        font-family: var(--font-main);
+        font-size: 1.4rem;
+        color: var(--color-black);
         width: 20rem;
         height: 5.6rem;
-        background-color: inherit;
+        background-color: var(--color-white);
         border: none;
         cursor: pointer;
         box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-
+        transition: var(--theme-transition);
     }
 
     &__dropdown {
@@ -102,13 +163,30 @@
         margin: 10rem auto 0;
         display: block;
         color: rgb(63, 67, 105);
-        border: 2px solid #d6cfcf;
+        border: var(--border);
         border-radius: 5px;
         box-shadow: 4px 4px 8px -3px rgba(0,0,0,0.25);
+        transition: color 0.3s ease, background-color 0.3s ease;
 
         &.dark-theme {
             color: var(--color-white);
-            background-color: var(--color-background-light-grey);
+            background-color: var(--color-background-light-grey);      
+
+        }
+    }
+
+    &__btn-close {
+        width: 4.8rem;
+        height: 4.8rem;
+        box-shadow: 2px 2px 8px -3px rgba(0,0,0,0.25);
+        border: var(--border);
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: var(--color-white);
+        margin: auto 0;
+
+        svg {
+            fill: var(--color-background-light-grey)
         }
     }
 }

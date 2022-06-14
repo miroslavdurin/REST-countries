@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export async function fetchData(query = "all") {
-  console.log('call')
     try {
         const res = await axios({
             method: 'GET',
@@ -12,7 +11,7 @@ export async function fetchData(query = "all") {
         return res.data;
         
     }catch(err){
-        console.log(err)
+      throw err;
     }
 }       
 

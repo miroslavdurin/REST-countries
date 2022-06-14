@@ -1,7 +1,8 @@
 export const ACTIONS = {
     SET_COUNTRY: 'setCountry',
     SET_ALL_COUNTRIES: 'setAllCountries',
-    SET_ALL: 'setAll'
+    SET_ALL: 'setAll',
+    SET_IS_DETAILS: 'setIsDetails'
 }
 
 export function CountryReducer(state, action) { 
@@ -43,6 +44,11 @@ export function CountryReducer(state, action) {
                 country: {...action.payload.country},
                 allCountries: [...action.payload.allCountries],
                 region: createRegions(action.payload.allCountries)
+            };
+        case ACTIONS.SET_IS_DETAILS: 
+            return {
+                ...state,
+                isDetails: action.payload
             }
         default:
             return state
