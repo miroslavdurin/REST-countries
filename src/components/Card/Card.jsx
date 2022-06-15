@@ -23,7 +23,7 @@ function Card({countryCard}) {
             <motion.div   /* transition={{layout: 
                             {duration:  1,
                             ease: "backInOut" }}} */ 
-                            /* layoutId = {countryCard.cca3.toLowerCase()} */
+                            layoutId = {countryCard.cca3.toLowerCase()}
                             className="card__flag-container mb-24">
                 <img  /* transition={{layout: 
                             {duration:  1,

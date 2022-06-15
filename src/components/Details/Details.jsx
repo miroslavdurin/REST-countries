@@ -20,14 +20,18 @@ function Details() {
     const {dark} = useContext(ThemeContext);
 
 
-    const [isExiting, setIsExiting] = useState(false);
-    const [load, setLoad] = useState(false)
+    const [isExiting, setIsExiting] = useState(false);    
 
-    
+
     let navigate = useNavigate()
+ 
+    useEffect(()=>{
+        if(Array.isArray(country.neighbours) && country.neighbours.length > 0 ) {country.neighbours.forEach(neighbour=>{
+            const img = new Image(); 
+            img.src = neighbour && neighbour.flags.svg           
+        })}       
+    },[]) 
 
-    useEffect(()=>{setLoad(true)},[])
-    console.log(country.neighbours)
     useEffect(()=>{
         window.scrollTo({top: 0})
 
@@ -67,10 +71,10 @@ function Details() {
     }, [location.pathname])
 
 /* FIXME South africa bug */
-    return (            
-
-        
-            <motion.main  transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
+    return (                    
+            <motion.main  
+            onLoad={()=>console.log('first')}
+            transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
             <button onClick={()=>{
                 dispatch({payload: false, type: 'setIsDetails'});
                 setIsExiting(true);           
@@ -84,14 +88,21 @@ function Details() {
                         
                         <motion.div   
                               transition={{layout: 
-                                {duration:  isDetails ? 0.4 : 1,
-                                ease: isDetails ? "easeOut" : "backInOut" }}}                              
+                                {duration: 1,
+                                ease: "backInOut" }}}
+                                /* onAnimationComplete={()=>dispatch({payload: true, type: 'setIsDetails'})}    */                           
                                 layoutId={ country.cca3.toLowerCase() }
-                                className="details__flag-container">                            
+                                className="details__flag-container"
+                                onLayoutAnimationComplete={()=>dispatch({payload: true, type: 'setIsDetails'})}
+                                
+                                >   
+                                                         
                                 <motion.img 
-                                    onLoad={()=>setLoad(true)}
-                                    layoutId= 'flag'
-                                    className="details__img" src={country.flags.svg} alt={country.name} />                          
+                                     layoutId= {isDetails && 'flag'}
+                                    transition={{layout: 
+                                        {duration:  0.4 ,
+                                        ease: "easeOut"  }}}
+                                    className="details__img" src={country.flags?.svg} alt={country.name} />                          
                         </motion.div>
                         <motion.div key={country.capital} 
                             initial={{opacity:0}}  
@@ -142,7 +153,7 @@ function Details() {
                                         <span>Border countries: </span>
                                         
                                     {isLoaded && country.neighbours.map(neighbour=> 
-                                        <Link onClick={()=>!isDetails && dispatch({payload: true, type: 'setIsDetails'})} key={neighbour.name.common} className="details__link" to={`/${neighbour.cca3.toLowerCase()}`}>{neighbour.name.common}</Link> )}                                  
+                                        <Link /* onClick={()=>dispatch({payload: true, type: 'setIsDetails'})} */ key={neighbour.name.common} className="details__link" to={`/${neighbour.cca3.toLowerCase()}`}>{neighbour.name.common}</Link> )}                                  
                                     </p>
                                 </div>
                             }
