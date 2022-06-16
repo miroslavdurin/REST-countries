@@ -59,6 +59,8 @@ function Cards() {
 
     useEffect(()=>{
         setIsDropdownOpen(false)
+        console.log(allCountries)
+
 
         if(allCountries.length > 0) setCountries(allCountries.slice(0, 20))
         else {

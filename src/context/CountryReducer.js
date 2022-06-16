@@ -27,6 +27,11 @@ export function CountryReducer(state, action) {
                 region: createRegions(action.payload)
             }
         case ACTIONS.SET_COUNTRY:
+            if(action.payload.neighbours) {action.payload.neighbours.forEach(neighbour=>{
+                const img = new Image(); 
+                img.src = neighbour.flags.svg;   
+                console.log(img)         
+            })}
             return {
                 ...state,
                 isLoaded: true,
@@ -35,7 +40,7 @@ export function CountryReducer(state, action) {
                     /* neighbours: action.payload.hasOwnProperty('borders') && action.payload.borders.map(border=>{
                         return state.allCountries.filter(country=>country.cca3 === border)[0]
                     }) */ 
-                }
+                }                
             };
         case ACTIONS.SET_ALL: 
             return {

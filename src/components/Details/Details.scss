@@ -15,7 +15,13 @@
         font-size: 1.6rem;
         line-height: 2.2rem;            
         border: var(--border);
-        border-radius: 10px;
+        border-radius: 10rem;      
+        background-color: #fff;  
+        transition: all 0.3s ease;
+        
+        &:hover {
+            box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+        }
 
         svg {
             fill: var(--color-black);
@@ -90,6 +96,7 @@
         flex-direction: column;
         flex-wrap: wrap;
         max-height: 18rem;
+        max-width: 50rem;
         align-content: space-between;
 
         @include respond(desktop) {
@@ -103,6 +110,8 @@
         font-weight: 300;
         font-size: 1.6rem;
         line-height: 3.2rem;
+        flex-wrap: wrap;
+        margin-right: 5rem;
 
         span {
             font-weight: 600;

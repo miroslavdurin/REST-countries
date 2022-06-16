@@ -10,7 +10,7 @@ import Loader from '../Loader/Loader';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
 
-import { AnimatePresence, motion, LayoutGroup } from 'framer-motion';
+import { AnimatePresence, motion, LayoutGroup, animate } from 'framer-motion';
 
 function Details() {
     const location = useLocation();
@@ -21,16 +21,13 @@ function Details() {
 
 
     const [isExiting, setIsExiting] = useState(false);    
-
-    console.log(isDetails);
+/* 
+    console.log(isDetails); */
     let navigate = useNavigate()
  
     useEffect(()=>{
-        if(Array.isArray(country.neighbours) && country.neighbours.length > 0 ) {country.neighbours.forEach(neighbour=>{
-            const img = new Image(); 
-            img.src = neighbour.flags.svg;
-        })}       
-    },[]) 
+             
+    }, []) 
 
     useEffect(()=>{
 
@@ -70,18 +67,25 @@ function Details() {
         }  
         window.scrollTo({top: 0})
 
+        console.log(country)
+        
+        /* if(country.neighbours) {country.neighbours.forEach(neighbour=>{
+            const img = new Image(); 
+            img.src = neighbour.flags.svg;            
+        })}   */
+
     }, [location.pathname])
 
 /* FIXME South africa bug */
     return (                    
             <motion.main  
             transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
-            <button onClick={()=>{
+            <motion.button onClick={()=>{
                 dispatch({payload: false, type: 'setIsDetails'});
                 setIsExiting(true);           
-                navigate('/');                   
-               
-                }} className={`details__btn-back mb-80 ${dark && 'dark-theme'}`} ><Arrow/> Back</button>
+                navigate('/');                      
+                }} 
+                className={`details__btn-back mb-80 ${dark && 'dark-theme'}`} ><Arrow/> Back</motion.button>
             {
                 isLoaded ? 
                 <>
@@ -130,7 +134,7 @@ function Details() {
                                 </p>
                                 <p className="details__paragraph">
                                     <span>Capital: </span>
-                                    {country.capital} 
+                                    {Array.isArray(country.capital) ? country.capital.join(', ') : country.capital} 
                                 </p>
                                 <p className="details__paragraph">
                                     <span>Top Level Domain: </span>
