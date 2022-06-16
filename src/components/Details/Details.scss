@@ -37,11 +37,15 @@
         svg {
             fill: var(--color-white);
         }
+
+        &:hover {        
+            box-shadow: rgba(246, 246, 247, 0.801) 0 1px 30px;        
+        }
     }
 
     &__container {
         display: flex;
-        gap: 12rem;
+        gap: 25rem;
 
         @include respond(desktop) {
             gap: 7vw;
@@ -57,7 +61,9 @@
     &__flag-container {
         transform-origin: top left;
         flex: 1;    
-        max-width: 40vw;    
+        max-width: 30vw;   
+        border-radius: 5px;
+        max-height: 50vh;
         height: 100%;
         display: flex;
         justify-content: flex-start;
@@ -73,16 +79,14 @@
 
     &__img {
         width: 100%;
-        object-fit: contain;
-        height: 85%;
+        height: 100%;
+        object-fit: cover;
         border-radius: 5px;
         display: block;
         margin-right: auto;
         
-        @include respond(desktop) {
-            height: fit-content;
+        @include respond(desktop) {            
             flex: 1;
-            padding-top: 4rem;
         }
     }
 
@@ -117,6 +121,10 @@
             font-weight: 600;
             margin-right: 1rem;
         }
+
+        @include respond(phone-lg) {
+            margin-right: 0;
+        }
     }
 
     &__links {
@@ -146,4 +154,5 @@
         color: var(--color-white);
         background-color: var(--color-background-light-grey);
     }
+
 }

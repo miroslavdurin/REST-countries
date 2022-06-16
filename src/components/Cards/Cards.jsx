@@ -159,10 +159,9 @@ function Cards() {
             <div className="cards__inputs">
 
                 <form autoComplete="off" className="cards__form">                    
-                    <input size="30" id="input" className={`cards__input ${dark && 'dark-theme'} ${isError && 'error'}`} placeholder="Search for a country..." ref={inputRef}  name="search" type="search" value={input.value} onInput={debounce(handleChange, 500)} />    
+                    <input size="30" id="input" className={`cards__input ${dark && 'dark-theme'} ${isError && 'error'}`} placeholder="Search for a country..." ref={inputRef}  name="search" type="text" value={input.value} onInput={debounce(handleChange, 500)} />    
                     <label className="cards__input-label" htmlFor="input"><Search/></label>
-                </form> 
-                  
+                </form>                   
 
                 {   input ? 
                         <button className="cards__btn-close" onClick={()=>setInput("")} aria-label="Clear input field">

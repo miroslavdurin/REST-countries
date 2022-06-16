@@ -10,7 +10,7 @@ import Loader from '../Loader/Loader';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
 
-import { AnimatePresence, motion, LayoutGroup, animate } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 function Details() {
     const location = useLocation();
@@ -19,10 +19,8 @@ function Details() {
     const {allCountries, country, isLoaded, dispatch, isDetails} = useContext(CountryContext);  
     const {dark} = useContext(ThemeContext);
 
-
     const [isExiting, setIsExiting] = useState(false);    
-/* 
-    console.log(isDetails); */
+
     let navigate = useNavigate()
  
     useEffect(()=>{
@@ -37,20 +35,21 @@ function Details() {
             try {
                 const data = await fetchData(); 
                 data.forEach(c=> {
-                    c.neighbours = c.hasOwnProperty('borders') && c.borders.map(border=>{
+                    c.neighbours = c.hasOwnProperty('borders') && c.borders.map(border=>{                        
                         return data.filter(country=>country.cca3 === border)[0]
                     })
                 })                              
                
-                const findCountry = data.find(c=>c.cca3.toLowerCase() === path);               
-                
+                const findCountry = data.find(c=>c.cca3.toLowerCase() === path); 
+                             
                 dispatch( {
                     payload: {
                     allCountries: [...data],
                     country: {...findCountry}
                     }, 
                     type: 'setAll'
-                })
+                }) 
+
             } catch(err) {
                 console.log(err)
             }
@@ -66,35 +65,31 @@ function Details() {
             dispatch({payload: {...findCountry}, type: 'setCountry'})
         }  
         window.scrollTo({top: 0})
-
-        console.log(country)
-        
-        /* if(country.neighbours) {country.neighbours.forEach(neighbour=>{
-            const img = new Image(); 
-            img.src = neighbour.flags.svg;            
-        })}   */
-
     }, [location.pathname])
 
-/* FIXME South africa bug */
     return (                    
             <motion.main  
             transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
-            <motion.button onClick={()=>{
+            <button onClick={()=>{
                 dispatch({payload: false, type: 'setIsDetails'});
                 setIsExiting(true);           
                 navigate('/');                      
                 }} 
-                className={`details__btn-back mb-80 ${dark && 'dark-theme'}`} ><Arrow/> Back</motion.button>
+                className={`details__btn-back mb-80 ${dark && 'dark-theme'}`} ><Arrow/> Back</button>
             {
                 isLoaded ? 
                 <>
                         <div className={`details__container ${dark && 'dark-theme'}`}>
                         
                         <motion.div   
-                              transition={{layout: 
-                                {duration: 1,
-                                ease: "backInOut" }}}
+                              transition={{
+                                layout: 
+                                { 
+                                duration: 1,
+                                ease: "backInOut",
+                                type: "spring",
+                                mass: 0.5
+                            }}}
                                 /* onAnimationComplete={()=>dispatch({payload: true, type: 'setIsDetails'})}    */                           
                                 layoutId={ country.cca3.toLowerCase() }
                                 className="details__flag-container"
