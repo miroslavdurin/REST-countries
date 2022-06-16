@@ -19,9 +19,8 @@ function App() {
   
 
   return (
-
       <div className={`App ${dark && 'dark-theme'}`}>      
-      <header>
+        <header>
           <Nav />
         </header>
         

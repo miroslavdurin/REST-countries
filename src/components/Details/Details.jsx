@@ -92,7 +92,7 @@ function Details() {
                                 /* mass: !phoneScreen && 0.5, *//* 
                                 delay: phoneScreen && 0.8 */
                             }}}                     
-                                layoutId={ country.cca3.toLowerCase() }
+                                layoutId={ !phoneScreen && country.cca3.toLowerCase() }
                                 className="details__flag-container"                                
                                 onLayoutAnimationComplete={()=>{
                                     dispatch({payload: true, type: 'setIsDetails'})                                    
@@ -100,7 +100,7 @@ function Details() {
                                 }}                                
                                 >                                                         
                                 <motion.img 
-                                    layoutId= {isDetails &&  'flag'}
+                                    layoutId= {isDetails && !phoneScreen &&  'flag'}
                                     transition={{layout: 
                                         {duration:  0.4 ,
                                         ease: "easeOut"  }}}
@@ -155,7 +155,7 @@ function Details() {
                                         <span>Border countries: </span>
                                         
                                     {isLoaded && country.neighbours.map(neighbour=> 
-                                        <Link /* onClick={()=>dispatch({payload: true, type: 'setIsDetails'})} */ key={neighbour.name.common} className="details__link" to={`/${neighbour.cca3.toLowerCase()}`}>{neighbour.name.common}</Link> )}                                  
+                                        <Link onClick={()=>window.scrollTo({top:0})} key={neighbour.name.common} className="details__link" to={`/${neighbour.cca3.toLowerCase()}`}>{neighbour.name.common}</Link> )}                                  
                                     </p>
                                 </div>
                             }

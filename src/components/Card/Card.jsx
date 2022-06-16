@@ -10,9 +10,11 @@ function Card({countryCard}) {
     const {allCountries, dispatch, country}= useContext(CountryContext); 
     const {dark} = useContext(ThemeContext);
 
+    const phoneScreen = useMediaQuery('(max-width: 768px)');
+
     const navigate = useNavigate();    
-    function handleClick() {/* 
-        window.scrollTo({top: 200}) */
+    function handleClick() { 
+        window.scrollTo({top: 0}) 
 
         const findCountry = allCountries.find(country=>country.cca3 === countryCard.cca3)
 
@@ -26,7 +28,7 @@ function Card({countryCard}) {
             <motion.div   /* transition={{layout: 
                             {duration:  1,
                             ease: "backInOut" }}} */ 
-                            layoutId = {countryCard.cca3.toLowerCase()}
+                            layoutId = { phoneScreen && countryCard.cca3.toLowerCase()}
                             className="card__flag-container mb-24">
                 <img  /* transition={{layout: 
                             {duration:  1,
