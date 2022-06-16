@@ -11,8 +11,8 @@ function Card({countryCard}) {
     const {dark} = useContext(ThemeContext);
 
     const navigate = useNavigate();    
-    function handleClick() {
-        window.scrollTo({top: 200})
+    function handleClick() {/* 
+        window.scrollTo({top: 200}) */
 
         const findCountry = allCountries.find(country=>country.cca3 === countryCard.cca3)
 

@@ -121,7 +121,7 @@ function Cards() {
         
         return ()=>{
             window.removeEventListener('click', handleClick);
-            window.scrollTo({top: 200});
+           /*  window.scrollTo({top: 200}); */
             }
         
     }, [selectRegion, isRegion])

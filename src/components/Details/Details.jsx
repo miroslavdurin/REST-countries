@@ -96,7 +96,7 @@ function Details() {
                                 className="details__flag-container"                                
                                 onLayoutAnimationComplete={()=>{
                                     dispatch({payload: true, type: 'setIsDetails'})                                    
-                                    window.scrollTo({top: 200})
+                                    /* window.scrollTo({top: 200}) */
                                 }}                                
                                 >                                                         
                                 <motion.img 
