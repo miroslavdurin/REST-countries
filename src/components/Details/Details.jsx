@@ -86,7 +86,7 @@ function Details() {
                                 layout: 
                                 { 
                                 duration:  0.8,
-                                ease: phoneScreen ? "easeOut" : "backInOut",
+                                ease: !phoneScreen && "backInOut",
                                 type: !phoneScreen && "spring",
                                 
                                 /* mass: !phoneScreen && 0.5, *//* 
@@ -95,10 +95,9 @@ function Details() {
                                 layoutId={ country.cca3.toLowerCase() }
                                 className="details__flag-container"                                
                                 onLayoutAnimationComplete={()=>{
-                                    dispatch({payload: true, type: 'setIsDetails'})
-                                    window.scrollTo({top:0})
-                                }}
-                                
+                                    dispatch({payload: true, type: 'setIsDetails'})                                    
+                                    window.scrollTo({top: 200})
+                                }}                                
                                 >                                                         
                                 <motion.img 
                                     layoutId= {isDetails &&  'flag'}

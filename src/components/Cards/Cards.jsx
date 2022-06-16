@@ -119,7 +119,10 @@ function Cards() {
         setCountries(region[selectRegion].slice(0, 20))
         setIsRegion(true)              
         
-        return window.removeEventListener('click', handleClick)
+        return ()=>{
+            window.removeEventListener('click', handleClick);
+            window.scrollTo({top: 200});
+            }
         
     }, [selectRegion, isRegion])
 
