@@ -28,7 +28,7 @@ function App() {
         <AnimatePresence exitBeforeEnter initial={true}>          
             <Routes location={location.pathname === '/' ? location.location : location} key={location.key}>
               <Route path='/' element={<Cards />} />                  
-              <Route path='/:country' element={<Details />} />
+              <Route path=':country' element={<Details />} />
             </Routes>                
      
         </AnimatePresence>                           

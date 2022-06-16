@@ -33,7 +33,6 @@ function Details() {
     },[]) 
 
     useEffect(()=>{
-        window.scrollTo({top: 0})
 
         console.log(location.pathname)
 
@@ -69,6 +68,7 @@ function Details() {
             const findCountry = allCountries.find(c=>c.cca3.toLowerCase() === path);             
             dispatch({payload: {...findCountry}, type: 'setCountry'})
         }  
+        window.scrollTo({top: 0})
 
     }, [location.pathname])
 
