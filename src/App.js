@@ -17,7 +17,6 @@ function App() {
   const {dark} = useContext(ThemeContext)
   const location = useLocation();
   
-  console.log(location.pathname)
 
   return (
 

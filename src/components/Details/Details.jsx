@@ -22,18 +22,20 @@ function Details() {
 
     const [isExiting, setIsExiting] = useState(false);    
 
-
+    console.log(isDetails);
     let navigate = useNavigate()
  
     useEffect(()=>{
         if(Array.isArray(country.neighbours) && country.neighbours.length > 0 ) {country.neighbours.forEach(neighbour=>{
             const img = new Image(); 
-            img.src = neighbour && neighbour.flags.svg           
+            img.src = neighbour.flags.svg;
         })}       
     },[]) 
 
     useEffect(()=>{
         window.scrollTo({top: 0})
+
+        console.log(location.pathname)
 
         async function getCountry() {
             try {
@@ -73,7 +75,6 @@ function Details() {
 /* FIXME South africa bug */
     return (                    
             <motion.main  
-            onLoad={()=>console.log('first')}
             transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
             <button onClick={()=>{
                 dispatch({payload: false, type: 'setIsDetails'});
@@ -95,10 +96,9 @@ function Details() {
                                 className="details__flag-container"
                                 onLayoutAnimationComplete={()=>dispatch({payload: true, type: 'setIsDetails'})}
                                 
-                                >   
-                                                         
+                                >                                                         
                                 <motion.img 
-                                     layoutId= {isDetails && 'flag'}
+                                    layoutId= {isDetails && 'flag'}
                                     transition={{layout: 
                                         {duration:  0.4 ,
                                         ease: "easeOut"  }}}
