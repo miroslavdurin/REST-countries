@@ -4,7 +4,6 @@ import './Nav.scss';
 import { ReactComponent as MoonIcon } from '../../assets/moon.svg';
 import { ReactComponent as SunIcon } from '../../assets/sun.svg';
 
-
 function Nav() {
     const { dark, dispatch} = useContext(ThemeContext);
 

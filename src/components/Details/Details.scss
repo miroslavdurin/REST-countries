@@ -46,15 +46,18 @@
     &__container {
         display: flex;
         gap: 25rem;
+        align-items: center;
 
         @include respond(desktop) {
-            gap: 7vw;
-            justify-content: space-between;
+            gap: 15rem;
+            justify-content: space-between;            
         }
 
         @include respond(phone-lg) {
             flex-direction: column;
             gap: 4.4rem;
+            align-items: flex-start;
+
         }
     }
 
@@ -70,6 +73,10 @@
 
         img {
             display: block;
+        }
+
+        @include respond(desktop) {
+            max-width: 45vw;    
         }
 
         @include respond(phone-lg) {
@@ -97,6 +104,11 @@
     &__info-container {
         padding: 4rem 0;
         flex: 1;
+
+        @include respond(desktop) {            
+            flex: 0.7;
+        }  
+
     }
 
     &__details {

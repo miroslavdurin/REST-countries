@@ -4,7 +4,7 @@
     }
 
     @if $breakpoint == phone-lg {
-        @media screen and (max-width: 50em) {@content}    
+        @media screen and (max-width: 60em) {@content}    
     }
 
     @if $breakpoint == desktop {

@@ -26,10 +26,10 @@ function Details() {
     let navigate = useNavigate()
  
     const phoneScreen = useMediaQuery('(max-width: 768px)')
-  
-    useEffect(()=>{
-        window.scrollTo({top: 0})
+  /* 
+    if(!phoneScreen) window.scrollTo({top: 0}); */
 
+    useEffect(()=>{
         console.log(location.pathname)
 
         async function getCountry() {
@@ -82,26 +82,30 @@ function Details() {
                         <div className={`details__container ${dark && 'dark-theme'}`}>
                         
                         <motion.div   
-                              transition={{
+                              transition={{                                
                                 layout: 
                                 { 
-                                duration: 1,
+                                duration:  0.8,
                                 ease: phoneScreen ? "easeOut" : "backInOut",
-                                type: "spring",
-                                mass: 0.5,
-                                delay: phoneScreen && 0.8
+                                type: !phoneScreen && "spring",
+                                
+                                /* mass: !phoneScreen && 0.5, *//* 
+                                delay: phoneScreen && 0.8 */
                             }}}                     
                                 layoutId={ country.cca3.toLowerCase() }
-                                className="details__flag-container"
-                                onLayoutAnimationComplete={()=>dispatch({payload: true, type: 'setIsDetails'})}
+                                className="details__flag-container"                                
+                                onLayoutAnimationComplete={()=>{
+                                    dispatch({payload: true, type: 'setIsDetails'})
+                                    window.scrollTo({top:0})
+                                }}
                                 
                                 >                                                         
                                 <motion.img 
-                                    layoutId= {isDetails && 'flag'}
+                                    layoutId= {isDetails &&  'flag'}
                                     transition={{layout: 
                                         {duration:  0.4 ,
                                         ease: "easeOut"  }}}
-                                    className="details__img" src={country.flags?.svg} alt={country.name} />                          
+                                        className="details__img" src={country.flags?.svg} alt={country.name} />                          
                         </motion.div>
                         <motion.div key={country.capital} 
                             initial={{opacity:0}}  
