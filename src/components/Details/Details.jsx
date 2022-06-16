@@ -12,6 +12,8 @@ import ThemeContext from '../../context/ThemeContext';
 
 import { motion } from 'framer-motion';
 
+import { useMediaQuery } from '../../hooks/useMediaQuery';
+
 function Details() {
     const location = useLocation();
     const path = location.pathname.replaceAll('%20', ' ').slice(1)
@@ -23,11 +25,10 @@ function Details() {
 
     let navigate = useNavigate()
  
+    const phoneScreen = useMediaQuery('(max-width: 768px)')
+  
     useEffect(()=>{
-             
-    }, []) 
-
-    useEffect(()=>{
+        window.scrollTo({top: 0})
 
         console.log(location.pathname)
 
@@ -64,7 +65,6 @@ function Details() {
             const findCountry = allCountries.find(c=>c.cca3.toLowerCase() === path);             
             dispatch({payload: {...findCountry}, type: 'setCountry'})
         }  
-        window.scrollTo({top: 0})
     }, [location.pathname])
 
     return (                    
@@ -86,11 +86,11 @@ function Details() {
                                 layout: 
                                 { 
                                 duration: 1,
-                                ease: "backInOut",
+                                ease: phoneScreen ? "easeOut" : "backInOut",
                                 type: "spring",
-                                mass: 0.5
-                            }}}
-                                /* onAnimationComplete={()=>dispatch({payload: true, type: 'setIsDetails'})}    */                           
+                                mass: 0.5,
+                                delay: phoneScreen && 0.8
+                            }}}                     
                                 layoutId={ country.cca3.toLowerCase() }
                                 className="details__flag-container"
                                 onLayoutAnimationComplete={()=>dispatch({payload: true, type: 'setIsDetails'})}

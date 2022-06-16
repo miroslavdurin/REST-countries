@@ -87,9 +87,7 @@ function Cards() {
             return;
         }
 
-        getCountries().then((data)=> setCountries([...data]) );        
-
-        
+        getCountries().then((data)=> setCountries([...data]) );                
     }, [input])
  
 

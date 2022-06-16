@@ -75,6 +75,10 @@
         @include respond(phone-lg) {
             max-width: 100%;
         }
+
+        @include respond(phone-lg) {
+            max-height: unset;
+        }
     }
 
     &__img {

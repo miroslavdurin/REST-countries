@@ -190,6 +190,10 @@
         svg {
             fill: var(--color-background-light-grey)
         }
+
+        @include respond(phone-lg) {
+            margin-left: 0;
+        }
     }
 }
 

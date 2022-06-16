@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 function Card({countryCard}) {    
     const {allCountries, dispatch, country}= useContext(CountryContext); 
