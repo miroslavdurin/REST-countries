@@ -11,12 +11,7 @@ import { ReactComponent as Up } from '../../assets/arrow-up.svg';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
 
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
-
-//  https://restcountries.com/v3.1/name/{name}
-//  https://restcountries.com/v3.1/region/{region}
-
-
+import { AnimatePresence, motion } from 'framer-motion';
 
 function Cards() {
     const [countries, setCountries] = useState([]);
@@ -26,11 +21,34 @@ function Cards() {
     const [isRegion, setIsRegion] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [displayBtn, setDisplayBtn] = useState(true);
+    const [isInputVisible, setIsInputVisible] = useState(false);
 
-    const { allCountries, country, region,dispatch, isLoaded }= useContext(CountryContext); 
-    const {light, dark} = useContext(ThemeContext);
+    const { allCountries, region,dispatch, isLoaded }= useContext(CountryContext); 
+    const { dark } = useContext(ThemeContext);
 
     const inputRef = useRef(null);
+     
+    function callback(entries) {
+        const [entry] = entries;
+        setIsInputVisible(entry.isIntersecting);
+    }
+
+    const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1
+    }
+
+    useEffect(()=>{
+        const observer = new IntersectionObserver(callback, options)
+
+        if(inputRef.current) observer.observe(inputRef.current);
+
+        return ()=>{
+            if(inputRef.current) observer.unobserve(inputRef.current);
+        }
+    }, [inputRef])
+
     
     async function getCountries() {        
         let data = [];
@@ -59,8 +77,6 @@ function Cards() {
 
     useEffect(()=>{
         setIsDropdownOpen(false)
-        console.log(allCountries)
-
 
         if(allCountries.length > 0) setCountries(allCountries.slice(0, 20))
         else {
@@ -71,7 +87,6 @@ function Cards() {
                 })                               
         }        
     }, [])
-
 
     useEffect(()=> {
         setDisplayBtn(false);
@@ -104,30 +119,17 @@ function Cards() {
             return;
         };
        
-        /* async function getRegion() {
-            const data = await fetchData(`${select === "default" ? 'all' : 'region/' + select }`);           
-
-            data.forEach(c=> {
-                c.neighbours = c.hasOwnProperty('borders') && c.borders.map(border=>{
-                    return data.filter(country=>country.cca3 === border)[0]
-                })
-            })    
-            setCountries([...data]);
-            
-        }  */
         setInput(""); 
         setCountries(region[selectRegion].slice(0, 20))
         setIsRegion(true)              
         
         return ()=>{
             window.removeEventListener('click', handleClick);
-           /*  window.scrollTo({top: 200}); */
-            }
+        }
         
     }, [selectRegion, isRegion])
 
     function handleMoreBtn() {
-
         let moreCountries;
         if(isRegion){
             moreCountries = countries.length < region[selectRegion].length ? region[selectRegion].slice(0, countries.length + 20) : region[selectRegion]            
@@ -156,7 +158,7 @@ function Cards() {
 
 
     return (        
-        <main className={`main-cards container ${dark && 'dark-theme'}`}>
+        <motion.main exit={{opacity: 0}} className={`main-cards container ${dark && 'dark-theme'}`}>
             <div className="cards__inputs">
 
                 <form autoComplete="off" className="cards__form">                    
@@ -200,10 +202,10 @@ function Cards() {
                         displayBtn
                         && 
                         <motion.button 
-                        initial={{opacity:0}}
-                        animate={{opacity:1}}
-                        onClick={handleMoreBtn} 
-                        className={`cards__btn-more ${dark && 'dark-theme'}`}>
+                            initial={{opacity:0}}
+                            animate={{opacity:1}}
+                            onClick={handleMoreBtn} 
+                            className={`cards__btn-more ${dark && 'dark-theme'}`}>
                             Load more...
                         </motion.button>
                     }
@@ -211,11 +213,23 @@ function Cards() {
                 :                
                 <Loader />                             
             }           
+            <AnimatePresence>
+              { !isInputVisible &&
+                    <motion.button 
+                        initial={{opacity: 0}} 
+                        animate={{opacity: 1}} 
+                        exit={{opacity: 0}}
+                        transition={{
+                            delay: 0.2, 
+                            duration: 0.2                            
+                        }} 
+                        onClick={()=> window.scrollTo({top: 0})} className="arrow-up">
+                        <Up/>
+                    </motion.button >}  
+            </AnimatePresence>
             
-            <div onClick={()=> window.scrollTo({top: 0})} className="arrow-up">
-                <Up/>
-            </div>
-        </main>
+               
+        </motion.main>
     )
 }
 

@@ -20,7 +20,16 @@
     border-radius: 100px;
     padding: 1.6rem;
     background-color: var(--color-white);
-    cursor: pointer;
+    cursor: pointer;    
+    box-shadow: rgba(66, 24, 24, 0.2) 3px 3px 15px;
+    transition: all 0.3s ease;
+
+    &:hover {
+    box-shadow: rgba(66, 24, 24, 0.25) 3px 3px 30px;
+
+    }
+        
+
 }
 
 

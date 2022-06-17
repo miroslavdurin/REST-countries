@@ -82,13 +82,7 @@ function Details() {
                         <div className={`details__container ${dark && 'dark-theme'}`}>
                         {
                             phoneScreen ? 
-                            <div                                                                
-                                className="details__flag-container"                               
-                                /* onLayoutAnimationComplete={()=>{
-                                    dispatch({payload: true, type: 'setIsDetails'})   
-                                    console.log('complete')                                  
-                                }}   */                              
-                                >                                                         
+                            <div className="details__flag-container">                                                         
                                 <motion.img 
                                     layoutId= {isDetails &&  'flag'}                                       
                                     transition={{layout: 

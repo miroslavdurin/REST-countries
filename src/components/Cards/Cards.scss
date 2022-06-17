@@ -49,7 +49,8 @@
         padding-left: 7.4rem;    
         padding-right: 1rem;
         border: none;
-        transition: var(--theme-transition);
+        border-bottom: 1px solid rgba(66, 24, 24, 0.2); 
+        transition: all 0.3s ease;
         
 
         @include respond(phone-lg) {
@@ -59,6 +60,7 @@
         
         &:focus {
             outline: 1px solid lightgray;
+            box-shadow: 6px 6px 25px rgba(0,0,0,0.13);      
         }
 
         &::placeholder {
@@ -73,8 +75,7 @@
         & + .cards__input-label {
             svg {
                fill: var(--color-white); 
-            }
-            
+            }            
         }
     }
 
@@ -166,11 +167,25 @@
         border: var(--border);
         border-radius: 5px;
         box-shadow: 4px 4px 8px -3px rgba(0,0,0,0.25);
-        transition: color 0.3s ease, background-color 0.3s ease;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.25);
+            transform: translateY(-3px);
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
 
         &.dark-theme {
             color: var(--color-white);
             background-color: var(--color-background-light-grey);      
+            box-shadow: 4px 4px 8px -3px rgba(255,255,255,0.25);
+
+            &:hover {
+                box-shadow: 4px 4px 15px rgba(255,255,255,0.25);
+            }
 
         }
     }
