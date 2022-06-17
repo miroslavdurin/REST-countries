@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useMediaQuery, useWindowSize } from '../../hooks/useMediaQuery';
 
 function Card({countryCard}) {    
     const {allCountries, dispatch, country}= useContext(CountryContext); 
     const {dark} = useContext(ThemeContext);
 
-    const phoneScreen = useMediaQuery('(max-width: 768px)');
+    const phoneScreen = useMediaQuery('(max-width: 768px)');    
 
     const navigate = useNavigate();    
-    function handleClick() { 
-        window.scrollTo({top: 0}) 
+    function handleClick() { /* 
+        window.scrollTo({top: 0}) */
 
         const findCountry = allCountries.find(country=>country.cca3 === countryCard.cca3)
 
@@ -22,18 +22,33 @@ function Card({countryCard}) {
         
         navigate(countryCard.cca3.toLowerCase());
     }
-
+    
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} onClick={handleClick} className={`card ${dark && 'dark-theme'}`}>
-            <motion.div   /* transition={{layout: 
-                            {duration:  1,
-                            ease: "backInOut" }}} */ 
-                            layoutId = { phoneScreen && countryCard.cca3.toLowerCase()}
-                            className="card__flag-container mb-24">
-                <img  /* transition={{layout: 
-                            {duration:  1,
-                            ease: "backInOut" }}} */  src={countryCard.flags?.svg} className="card__img" alt={countryCard.name?.common} />
-            </motion.div>
+            {phoneScreen ? 
+                <motion.div 
+                    layoutId="home-flag"                    
+                    className="card__flag-container mb-24" 
+                    transition={{
+                        layout: {
+                            duration:4,                           
+
+                        }
+                    }}                   
+                >                            
+                    <img src={countryCard.flags?.svg} className="card__img" alt={countryCard.name?.common} />
+                </motion.div>
+
+                :
+
+                <motion.div 
+                    layoutId = { countryCard.cca3.toLowerCase()}
+                    className="card__flag-container mb-24"
+                >                            
+                    <img  src={countryCard.flags?.svg} className="card__img" alt={countryCard.name?.common} />
+                </motion.div>
+            }
+            
             <div className="card__content">
                 <h3 className="heading--h3 mb-16">{countryCard.name?.common}</h3>
                 <p className="card__info mb-8">

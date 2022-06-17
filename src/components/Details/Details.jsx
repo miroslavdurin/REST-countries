@@ -10,7 +10,7 @@ import Loader from '../Loader/Loader';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
 
-import { motion } from 'framer-motion';
+import { animate, motion } from 'framer-motion';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 
@@ -80,32 +80,54 @@ function Details() {
                 isLoaded ? 
                 <>
                         <div className={`details__container ${dark && 'dark-theme'}`}>
-                        
-                        <motion.div   
-                              transition={{                                
-                                layout: 
-                                { 
-                                duration:  0.8,
-                                ease: !phoneScreen && "backInOut",
-                                type: !phoneScreen && "spring",
-                                
-                                /* mass: !phoneScreen && 0.5, *//* 
-                                delay: phoneScreen && 0.8 */
-                            }}}                     
-                                layoutId={ !phoneScreen && country.cca3.toLowerCase() }
+                        {
+                            phoneScreen ? 
+                            <motion.div  
+                                layoutId="home-flag"  
+                                transition={{
+                                    layout: {
+                                        duration:5,
+                                    }
+                                }}
+
                                 className="details__flag-container"                                
                                 onLayoutAnimationComplete={()=>{
-                                    dispatch({payload: true, type: 'setIsDetails'})                                    
-                                    /* window.scrollTo({top: 200}) */
+                                    dispatch({payload: true, type: 'setIsDetails'})                                     
                                 }}                                
                                 >                                                         
                                 <motion.img 
-                                    layoutId= {isDetails && !phoneScreen &&  'flag'}
+                                    layoutId= {isDetails &&  'flag'}                                       
                                     transition={{layout: 
                                         {duration:  0.4 ,
                                         ease: "easeOut"  }}}
                                         className="details__img" src={country.flags?.svg} alt={country.name} />                          
-                        </motion.div>
+                            </motion.div>
+
+                            :
+                             
+                            <motion.div   
+                              transition={{                                
+                                layout: 
+                                { 
+                                duration:  0.8,
+                                ease: "backInOut",
+                                type: "spring",                                
+                                }}}                     
+                                layoutId={ country.cca3.toLowerCase() }
+                                className="details__flag-container"                                
+                                onLayoutAnimationComplete={()=>{
+                                    dispatch({payload: true, type: 'setIsDetails'}) 
+                                }}                                
+                                >                                                         
+                                <motion.img 
+                                    layoutId= {isDetails && 'flag'}
+                                    transition={{layout: 
+                                        {duration:  0.4 ,
+                                        ease: "easeOut"  }}}
+                                        className="details__img" src={country.flags?.svg} alt={country.name} />                          
+                            </motion.div>                            
+                        }
+                        
                         <motion.div key={country.capital} 
                             initial={{opacity:0}}  
                             animate={{opacity:1}} 
@@ -158,11 +180,8 @@ function Details() {
                                         <Link onClick={()=>window.scrollTo({top:0})} key={neighbour.name.common} className="details__link" to={`/${neighbour.cca3.toLowerCase()}`}>{neighbour.name.common}</Link> )}                                  
                                     </p>
                                 </div>
-                            }
-                            
-                        </motion.div>  
-                        
-                        
+                            }                            
+                        </motion.div>                       
                     </div>
                 </>
                 :
