@@ -13,8 +13,8 @@ function Card({countryCard}) {
     const phoneScreen = useMediaQuery('(max-width: 768px)');    
 
     const navigate = useNavigate();    
-    function handleClick() { /* 
-        window.scrollTo({top: 0}) */
+    function handleClick() {  
+        window.scrollTo({top: 0}) 
 
         const findCountry = allCountries.find(country=>country.cca3 === countryCard.cca3)
 
@@ -26,18 +26,9 @@ function Card({countryCard}) {
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} onClick={handleClick} className={`card ${dark && 'dark-theme'}`}>
             {phoneScreen ? 
-                <motion.div 
-                    layoutId="home-flag"                    
-                    className="card__flag-container mb-24" 
-                    transition={{
-                        layout: {
-                            duration:4,                           
-
-                        }
-                    }}                   
-                >                            
+                <div>                            
                     <img src={countryCard.flags?.svg} className="card__img" alt={countryCard.name?.common} />
-                </motion.div>
+                </div>
 
                 :
 

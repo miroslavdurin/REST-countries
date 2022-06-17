@@ -82,18 +82,12 @@ function Details() {
                         <div className={`details__container ${dark && 'dark-theme'}`}>
                         {
                             phoneScreen ? 
-                            <motion.div  
-                                layoutId="home-flag"  
-                                transition={{
-                                    layout: {
-                                        duration:5,
-                                    }
-                                }}
-
-                                className="details__flag-container"                                
-                                onLayoutAnimationComplete={()=>{
-                                    dispatch({payload: true, type: 'setIsDetails'})                                     
-                                }}                                
+                            <div                                                                
+                                className="details__flag-container"                               
+                                /* onLayoutAnimationComplete={()=>{
+                                    dispatch({payload: true, type: 'setIsDetails'})   
+                                    console.log('complete')                                  
+                                }}   */                              
                                 >                                                         
                                 <motion.img 
                                     layoutId= {isDetails &&  'flag'}                                       
@@ -101,7 +95,7 @@ function Details() {
                                         {duration:  0.4 ,
                                         ease: "easeOut"  }}}
                                         className="details__img" src={country.flags?.svg} alt={country.name} />                          
-                            </motion.div>
+                            </div>
 
                             :
                              
@@ -128,7 +122,8 @@ function Details() {
                             </motion.div>                            
                         }
                         
-                        <motion.div key={country.capital} 
+                        <motion.div 
+                            key={country.capital} 
                             initial={{opacity:0}}  
                             animate={{opacity:1}} 
                             exit={{ opacity:0, }}  
