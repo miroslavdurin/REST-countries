@@ -70,10 +70,13 @@ function Details() {
     return (                    
             <motion.main  
             transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
-            <button onClick={()=>{
-                dispatch({payload: false, type: 'setIsDetails'});
-                setIsExiting(true);           
-                navigate('/');                      
+            <button 
+                role="button"
+                aria-label="Back to the home page"
+                onClick={()=>{
+                    dispatch({payload: false, type: 'setIsDetails'});
+                    setIsExiting(true);           
+                    navigate('/');                      
                 }} 
                 className={`details__btn-back mb-80 ${dark && 'dark-theme'}`} ><Arrow/> Back</button>
             {
@@ -88,7 +91,9 @@ function Details() {
                                     transition={{layout: 
                                         {duration:  0.4 ,
                                         ease: "easeOut"  }}}
-                                        className="details__img" src={country.flags?.svg} alt={country.name} />                          
+                                    className="details__img" 
+                                    src={country.flags?.svg} 
+                                    alt={country.name} />                          
                             </div>
 
                             :
@@ -112,7 +117,9 @@ function Details() {
                                     transition={{layout: 
                                         {duration:  0.4 ,
                                         ease: "easeOut"  }}}
-                                        className="details__img" src={country.flags?.svg} alt={country.name} />                          
+                                        className="details__img" 
+                                    src={country.flags?.svg} 
+                                    alt={country.name} />                          
                             </motion.div>                            
                         }
                         
