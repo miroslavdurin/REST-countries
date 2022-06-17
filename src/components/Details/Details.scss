@@ -17,7 +17,7 @@
         border: var(--border);
         border-radius: 10rem;      
         background-color: #fff;  
-        transition: all 0.3s ease;
+        transition: var(--default-transition);
         
         &:hover {
             box-shadow: rgba(66, 24, 24, 0.2) 0 1px 30px;
@@ -76,11 +76,7 @@
         }
 
         @include respond(desktop) {
-            max-width: 45vw;    
-        }
-
-        @include respond(phone-lg) {
-            max-width: 100%;
+            max-width: 100%    
         }
 
         @include respond(phone-lg) {
@@ -160,7 +156,7 @@
         box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.104931);
         border-radius: 2px;
         color: var(--color-black);
-        transition: all 0.3s ease;
+        transition: var(--default-transition);
 
         &:hover {
             box-shadow: rgba(66, 24, 24, 0.25) 0 1px 30px;

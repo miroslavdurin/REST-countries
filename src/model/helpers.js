@@ -10,7 +10,7 @@ export async function fetchData(query = "all") {
         if(res.statusText !== "OK") throw new Error({message: "Could not fetch data"})
         return res.data;
         
-    }catch(err){
+    } catch(err){
       throw err;
     }
 }       

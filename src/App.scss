@@ -7,25 +7,3 @@
 .App.dark-theme {
     background-color: var(--color-background-dark-grey);
 }
-
-.arrow-up {
-    position: fixed;
-    width: 7rem;
-    height: 7rem;
-    bottom: 3vh;
-    right: 7vw;
-    border: var(--border);
-    border-radius: 100px;
-    padding: 1.6rem;
-    background-color: var(--color-white);
-    cursor: pointer;    
-    box-shadow: rgba(66, 24, 24, 0.2) 3px 3px 15px;
-    transition: all 0.3s ease;
-
-    &:hover {
-        box-shadow: rgba(66, 24, 24, 0.25) 3px 3px 30px;
-    }      
-}
-
-
-

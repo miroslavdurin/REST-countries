@@ -36,10 +36,7 @@ export function CountryReducer(state, action) {
                 ...state,
                 isLoaded: true,
                 country: {
-                    ...action.payload,
-                    /* neighbours: action.payload.hasOwnProperty('borders') && action.payload.borders.map(border=>{
-                        return state.allCountries.filter(country=>country.cca3 === border)[0]
-                    }) */ 
+                    ...action.payload                   
                 }                
             };
         case ACTIONS.SET_ALL:      

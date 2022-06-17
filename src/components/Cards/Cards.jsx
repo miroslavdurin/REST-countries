@@ -27,7 +27,8 @@ function Cards() {
     const { dark } = useContext(ThemeContext);
 
     const inputRef = useRef(null);
-     
+    
+    //Intersection Observer API logic
     function callback(entries) {
         const [entry] = entries;
         setIsInputVisible(entry.isIntersecting);
@@ -49,7 +50,7 @@ function Cards() {
         }
     }, [inputRef])
 
-    
+    // Function for setting initial data
     async function getCountries() {        
         let data = [];
         if(!input) data = await fetchData();
@@ -70,11 +71,13 @@ function Cards() {
         return data;
     }
 
+    // Function for opening region dropdown menu
     function handleClick(e) {
         if(e.target.classList.contains('cards__region-btn')) return;
         setIsDropdownOpen(false)
     }
 
+    // Initial useEffect which sends all countries to context
     useEffect(()=>{
         setIsDropdownOpen(false)
 
@@ -88,6 +91,7 @@ function Cards() {
         }        
     }, [])
 
+    // UseEffect which manages input
     useEffect(()=> {
         setDisplayBtn(false);
         setIsDropdownOpen(false);
@@ -105,7 +109,7 @@ function Cards() {
         getCountries().then((data)=> setCountries([...data]) );                
     }, [input])
  
-
+    // UseEffect which manages selected region
     useEffect(()=> {
         setDisplayBtn(true);
         setIsDropdownOpen(false)
@@ -155,7 +159,6 @@ function Cards() {
         if(!e.target.classList.contains('cards__list-item')) return;
         setSelectRegion(e.target.dataset.region);
     }
-
 
     return (        
         <motion.main exit={{opacity: 0}} className={`main-cards container ${dark && 'dark-theme'}`}>
@@ -236,11 +239,9 @@ function Cards() {
                             duration: 0.2                            
                         }} 
                         onClick={()=> window.scrollTo({top: 0})} className="arrow-up">
-                        <Up/>
+                            <Up/>
                     </motion.button >}  
-            </AnimatePresence>
-            
-               
+            </AnimatePresence>                          
         </motion.main>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import './Details.scss';
 import { ReactComponent as Arrow } from '../../assets/arrow-left.svg';
@@ -28,7 +28,8 @@ function Details() {
     const phoneScreen = useMediaQuery('(max-width: 768px)')
   
     useEffect(()=>{
-        console.log(location.pathname)
+        // Function which is used to fetch country if there is no country in context state
+        // It is used in case that details page had been refreshed
 
         async function getCountry() {
             try {
@@ -67,7 +68,10 @@ function Details() {
 
     return (                    
             <motion.main  
-            transition={{duration:0.3}} animate={isExiting && {opacity:1}} exit={isExiting && {opacity:0}} className='container' >
+                transition={{duration:0.3}} 
+                animate={isExiting && {opacity:1}} 
+                exit={isExiting && {opacity:0}} 
+                className='container' >
             <button 
                 role="button"
                 aria-label="Back to the home page"
@@ -93,16 +97,13 @@ function Details() {
                                     src={country.flags?.svg} 
                                     alt={country.name} />                          
                             </div>
-
-                            :
-                             
+                            :                             
                             <motion.div   
                               transition={{                                
-                                layout: 
-                                { 
-                                duration:  0.8,
-                                ease: "backInOut",
-                                type: "spring",                                
+                                layout: { 
+                                    duration:  0.8,
+                                    ease: "backInOut",
+                                    type: "spring",                                
                                 }}}                     
                                 layoutId={ country.cca3.toLowerCase() }
                                 className="details__flag-container"                                
@@ -112,8 +113,8 @@ function Details() {
                                 >                                                         
                                 <motion.img 
                                     layoutId= {isDetails && 'flag'}
-                                    transition={{layout: 
-                                        {duration:  0.4 ,
+                                    transition={{ layout: {
+                                        duration:  0.4 ,
                                         ease: "easeOut"  }}}
                                         className="details__img" 
                                     src={country.flags?.svg} 
@@ -128,41 +129,42 @@ function Details() {
                             exit={{ opacity:0, }}  
                             transition={{duration: 0.2 }} 
                             className="details__info-container">
-                            <h1 className="heading--h1 mb-24">{country.name?.common}</h1>
-                            <div className="details__details">
-                                <p className="details__paragraph">
-                                    <span>Native Name: </span>
-                                    {country.name?.nativeName  ? Object.values(country.name?.nativeName)[0].common : country.name?.common}
-                                </p>
-                                <p className="details__paragraph">
-                                    <span>Population: </span>
-                                    {country.population?.toLocaleString()} 
-                                </p>
-                                <p className="details__paragraph">
-                                    <span>Region: </span>
-                                    {country.region} 
-                                </p>
-                                <p className="details__paragraph">
-                                    <span>Sub Region: </span>
-                                    {country.subregion} 
-                                </p>
-                                <p className="details__paragraph">
-                                    <span>Capital: </span>
-                                    {Array.isArray(country.capital) ? country.capital.join(', ') : country.capital} 
-                                </p>
-                                <p className="details__paragraph">
-                                    <span>Top Level Domain: </span>
-                                    {country.tld} 
-                                </p>
-                                <p className="details__paragraph">
-                                    <span>Currencies: </span>
-                                    {country.currencies && Object.values(country.currencies)[0].name}
-                                </p>
-                                <p className="details__paragraph">
-                                    <span>Languages: </span>
-                                    {country.languages && Object.values(country.languages).join(', ')}
-                                </p>
-                            </div>
+
+                                <h1 className="heading--h1 mb-24">{country.name?.common}</h1>
+                                <div className="details__details">
+                                    <p className="details__paragraph">
+                                        <span>Native Name: </span>
+                                        {country.name?.nativeName  ? Object.values(country.name?.nativeName)[0].common : country.name?.common}
+                                    </p>
+                                    <p className="details__paragraph">
+                                        <span>Population: </span>
+                                        {country.population?.toLocaleString()} 
+                                    </p>
+                                    <p className="details__paragraph">
+                                        <span>Region: </span>
+                                        {country.region} 
+                                    </p>
+                                    <p className="details__paragraph">
+                                        <span>Sub Region: </span>
+                                        {country.subregion} 
+                                    </p>
+                                    <p className="details__paragraph">
+                                        <span>Capital: </span>
+                                        {Array.isArray(country.capital) ? country.capital.join(', ') : country.capital} 
+                                    </p>
+                                    <p className="details__paragraph">
+                                        <span>Top Level Domain: </span>
+                                        {country.tld} 
+                                    </p>
+                                    <p className="details__paragraph">
+                                        <span>Currencies: </span>
+                                        {country.currencies && Object.values(country.currencies)[0].name}
+                                    </p>
+                                    <p className="details__paragraph">
+                                        <span>Languages: </span>
+                                        {country.languages && Object.values(country.languages).join(', ')}
+                                    </p>
+                                </div>
                             {
                             isLoaded && country.neighbours.length > 0 &&
                                 
@@ -180,10 +182,8 @@ function Details() {
                 </>
                 :
                 <Loader />
-            }
-            
-        </motion.main>     
-                      
+            }            
+        </motion.main>                          
     )
 }
 

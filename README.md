@@ -49,9 +49,10 @@ Users should be able to:
 - SASS/SCSS
 - BEM methodology
 - Flexbox
+- CSS Grid
 - [Axios](https://axios-http.com/docs/intro) - Promise based HTTP client for the browser and node.js
 - [React](https://reactjs.org/) - JS library
-- [Context API](https://reactjs.org/docs/context.html) - 
+- [Context API](https://reactjs.org/docs/context.html) - State management system for React
 - [React Router v6](https://reactrouter.com/docs/en/v6/getting-started/overview) -  Routing library for React
 - [Framer Motion](https://www.framer.com/docs/) - Animation library for React
 
@@ -89,7 +90,7 @@ if(action.payload.neighbours) {
 ## Author
 
 - Frontend Mentor - [@miroslavdurin](https://www.frontendmentor.io/profile/miroslavdurin)
-- GitHub - [miroslavdurin](https://github.com/miroslavdurin)
+- GitHub - [@miroslavdurin](https://github.com/miroslavdurin)
 
 ## Acknowledgments
 

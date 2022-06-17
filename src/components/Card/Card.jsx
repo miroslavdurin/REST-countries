@@ -9,10 +9,9 @@ import { useMediaQuery } from '../../hooks/useMediaQuery';
 function Card({countryCard}) {    
     const { allCountries, dispatch }= useContext(CountryContext); 
     const { dark } = useContext(ThemeContext);
-
+    const navigate = useNavigate();
     const phoneScreen = useMediaQuery('(max-width: 768px)');    
 
-    const navigate = useNavigate();    
     function handleClick() {  
         window.scrollTo({top: 0}) 
 

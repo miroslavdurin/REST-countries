@@ -38,21 +38,12 @@ export function ThemeReducer(state, action) {
             }
         default:
             return state
-    }      
-    
-    
+    }            
 }
-
 
 export function ThemeProvider({children}) {
     const [state, dispatch] = useReducer(ThemeReducer, INITIAL_STATE);
     localStorage.setItem('theme',JSON.stringify(state))
-
-/* 
-    console.log(state.country.borders)
-    state.allCountries.length > 0 && state.country.name && console.log(state.country.borders.map(border=>{
-        return state.allCountries.filter(country=>country.cca3 === border)[0]
-    })); */
     
     return (
         <ThemeContext.Provider value={{
