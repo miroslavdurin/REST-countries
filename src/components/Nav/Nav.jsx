@@ -14,8 +14,8 @@ function Nav() {
     return (
         <nav className={`nav ${dark && 'dark-theme'}`}>            
             <div className="container">
-                <h1 className="heading--h1">Where in the world?</h1> 
-                <button role="button" aria-label="Toggle theme" onClick={handleThemeSwitch} className="nav__btn-toggle-theme">
+                <h2 className="heading--h2">Where in the world?</h2> 
+                <button aria-label="Toggle theme" onClick={handleThemeSwitch} className="nav__btn-toggle-theme">
                     {dark ?                                                 
                         <><SunIcon /> Light Mode</>
                         :

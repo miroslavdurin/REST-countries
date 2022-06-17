@@ -180,12 +180,12 @@ function Cards() {
                 </form>                   
 
                 {   input ? 
-                        <button role="button" className="cards__btn-close" onClick={()=>setInput("")} aria-label="Clear input field">
+                        < button className="cards__btn-close" onClick={()=>setInput("")} aria-label="Clear input field">
                             <Close />  
                         </button>                    
                         :
                         <div className={`cards__region-select ${dark && 'dark-theme'}`}>                        
-                            <button role="button" aria-label="Region select" onClick={handleDropdownOpen} className="cards__region-btn">Filter by region</button>
+                            <button aria-label="Region select" onClick={handleDropdownOpen} className="cards__region-btn">Filter by region</button>
                             {isDropdownOpen  &&
                                 <ul onClick={handleRegionSelect} className={`cards__dropdown `}>
                                     <li data-region="world" className="cards__list-item">World</li>
@@ -215,8 +215,7 @@ function Cards() {
                         <motion.button 
                             initial={{opacity:0}}
                             animate={{opacity:1}}
-                            onClick={handleMoreBtn} 
-                            role="button"
+                            onClick={handleMoreBtn}                            
                             aria-label="Load more countries"
                             className={`cards__btn-more ${dark && 'dark-theme'}`}>
                             Load more...
@@ -229,7 +228,6 @@ function Cards() {
             <AnimatePresence>
               { !isInputVisible &&
                     <motion.button 
-                        role="button"
                         aria-label="Scroll back to top"
                         initial={{opacity: 0}} 
                         animate={{opacity: 1}} 

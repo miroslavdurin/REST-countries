@@ -73,7 +73,6 @@ function Details() {
                 exit={isExiting && {opacity:0}} 
                 className='container' >
             <button 
-                role="button"
                 aria-label="Back to the home page"
                 onClick={()=>{
                     dispatch({payload: false, type: 'setIsDetails'});
