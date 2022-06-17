@@ -10,7 +10,7 @@ import Loader from '../Loader/Loader';
 import CountryContext from '../../context/CountryContext';
 import ThemeContext from '../../context/ThemeContext';
 
-import { animate, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 
@@ -26,9 +26,7 @@ function Details() {
     let navigate = useNavigate()
  
     const phoneScreen = useMediaQuery('(max-width: 768px)')
-  /* 
-    if(!phoneScreen) window.scrollTo({top: 0}); */
-
+  
     useEffect(()=>{
         console.log(location.pathname)
 
@@ -82,7 +80,7 @@ function Details() {
             {
                 isLoaded ? 
                 <>
-                        <div className={`details__container ${dark && 'dark-theme'}`}>
+                    <div className={`details__container ${dark && 'dark-theme'}`}>
                         {
                             phoneScreen ? 
                             <div className="details__flag-container">                                                         

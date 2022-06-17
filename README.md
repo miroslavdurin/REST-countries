@@ -11,12 +11,9 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -33,21 +30,15 @@ Users should be able to:
 
 ### Screenshot
 
-![](./Main-screen--light-theme.png)
-![](./Main-screen--dark-theme.png)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![](./home-screen--light-theme.png)
+![](./home-screen--dark-theme.png)
+![](./details-screen--light-theme.png)
+![](./details-screen--dark-theme.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [GitHub solution](https://github.com/miroslavdurin/REST-countries)
+- Live Site URL: [REST Countries](https://restcountries-mdurin.netlify.app)
 
 ## My process
 
@@ -55,62 +46,51 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 - Semantic HTML5 markup
 - CSS custom properties
+- SASS/SCSS
+- BEM methodology
 - Flexbox
-- CSS Grid
-- Mobile-first workflow
+- [Axios](https://axios-http.com/docs/intro) - Promise based HTTP client for the browser and node.js
 - [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [Context API](https://reactjs.org/docs/context.html) - 
+- [React Router v6](https://reactrouter.com/docs/en/v6/getting-started/overview) -  Routing library for React
+- [Framer Motion](https://www.framer.com/docs/) - Animation library for React
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+The main thing I've learned were basics of using Context API. There were also some challenges with displaying dynamic values in JSX.
+I have also improved my knowledge on using Framer Motion library, mainly layout animations, which were tricky to make.
 
-To see how you can add code snippets, see below:
+The main issue which I had, happened after I started to animate route transitions with Framer Motion. For some reason it had collided 
+somehow with Context API, but I've solved that by writing this code:
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
 ```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
+<Routes location={location.pathname === '/' ? location.location : location} key={location.key}>
+```
+There was also a problem with animating Details components. I've noticed that if the image was loaded for the first time, sometimes 
+animation didn't happened. I managed to figure out that the cause was the fact that certain images were not loaded in cache, so I've 
+Googled the solution for that and found a way to preload images in React:
+
+```js
+if(action.payload.neighbours) {
+  action.payload.neighbours.forEach(neighbour=>{
+    const img = new Image(); 
+    img.src = neighbour.flags.svg;            
+  })
 }
 ```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
-
-### Continued development
-
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [Stack Overflow](https://stackoverflow.com) - This helped me with some bugs, mainly with preloading images in React.
+- [Framer Motion docs](https://www.framer.com/docs/) - Framer Motion documentation.
+- [Lama Dev YT-channel](https://www.youtube.com/c/LamaDev/videos) - This is where I've learned how to use Context API.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- Frontend Mentor - [@miroslavdurin](https://www.frontendmentor.io/profile/miroslavdurin)
+- GitHub - [miroslavdurin](https://github.com/miroslavdurin)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+This project was harder then expected, but I've managed to finish it just the way I intented. The only problem was that it last longer than I expected. I've learned a lot about React, especially how pages are being load in React. There were lots of issues with displaying dynamic data, which doesn't seem to load the way that I've thought it would. Perhaps there was a better way to manage fetched data, but I've managed to make it work.

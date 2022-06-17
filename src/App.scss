@@ -8,8 +8,6 @@
     background-color: var(--color-background-dark-grey);
 }
 
-
-
 .arrow-up {
     position: fixed;
     width: 7rem;
@@ -25,11 +23,8 @@
     transition: all 0.3s ease;
 
     &:hover {
-    box-shadow: rgba(66, 24, 24, 0.25) 3px 3px 30px;
-
-    }
-        
-
+        box-shadow: rgba(66, 24, 24, 0.25) 3px 3px 30px;
+    }      
 }
 
 

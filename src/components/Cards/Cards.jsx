@@ -162,7 +162,17 @@ function Cards() {
             <div className="cards__inputs">
 
                 <form autoComplete="off" className="cards__form">                    
-                    <input size="30" id="input" className={`cards__input ${dark && 'dark-theme'} ${isError && 'error'}`} placeholder="Search for a country..." ref={inputRef}  name="search" type="text" value={input.value} onInput={debounce(handleChange, 500)} />    
+                    <input 
+                        size="30" 
+                        id="input" 
+                        className={`cards__input ${dark && 'dark-theme'} ${isError && 'error'}`} 
+                        placeholder="Search for a country..." ref={inputRef}  
+                        name="search" type="text" 
+                        value={input.value} 
+                        onInput={debounce(handleChange, 500)} 
+                        aria-label="input"
+                        aria-required="false"
+                    />    
                     <label className="cards__input-label" htmlFor="input"><Search/></label>
                 </form>                   
 
@@ -190,14 +200,12 @@ function Cards() {
 
             {
                 isLoaded ?
-                <>  
-                   
+                <>                     
                     <div className='cards'>
                         {
                             countries.map(country=> <Card key={country.name.common} countryCard={country} />)
                         }
-                    </div> 
-                    
+                    </div>                     
                     {
                         displayBtn
                         && 

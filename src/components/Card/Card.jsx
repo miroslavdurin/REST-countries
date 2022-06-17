@@ -45,9 +45,9 @@ function Card({countryCard}) {
                 <p className="card__info mb-8">
                     <span>Region:</span> {countryCard.region}
                 </p>
-                {<p className="card__info">
+                <p className="card__info">
                     <span>Capital:</span> {countryCard.capital}
-                </p>}
+                </p>
             </div>            
         </motion.div>
     )
